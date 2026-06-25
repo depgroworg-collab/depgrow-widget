@@ -7,12 +7,12 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const body = await req.json()
-  const { id: _id, user_id: _uid, slug: _slug, created_at: _ca, ...rest } = body
+  const { id: _a, user_id: _b, slug: _c, created_at: _d, updated_at: _e, ...rest } = body
+  if (rest.phone) rest.phone = String(rest.phone).replace(/\D/g, '')
 
-  if (rest.phone) rest.phone = rest.phone.replace(/\D/g, '')
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (sb.from('widgets') as any)
+  const sb2 = sb as any
+  const { data, error } = await sb2
+    .from('widgets')
     .update(rest)
     .eq('id', params.id)
     .eq('user_id', user.id)
