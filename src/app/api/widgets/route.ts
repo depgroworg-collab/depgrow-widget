@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const { data, error } = await sb.from('widgets').insert({
+  const { data, error } = await (sb as any).from('widgets').insert({
     user_id:            user.id,
     name:               body.name,
     phone:              body.phone.replace(/\D/g, ''),
