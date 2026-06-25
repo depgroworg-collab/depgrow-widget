@@ -8,22 +8,19 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   const body = await req.json()
   const { id: _id, user_id: _uid, slug: _slug, created_at: _ca, ...rest } = body
-  const updateable: Record<string, unknown> = { ...rest }
 
-  if (updateable.phone && typeof updateable.phone === 'string') {
-    updateable.phone = updateable.phone.replace(/\D/g, '')
-  }
+  if (rest.phone) rest.phone = rest.phone.replace(/\D/g, '')
 
-  const { data, error } = await sb
-    .from('widgets')
-    .update(updateable as any)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = await (sb.from('widgets') as any)
+    .update(rest)
     .eq('id', params.id)
     .eq('user_id', user.id)
     .select()
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  if (!data)  return NextResponse.json({ error: 'Widget not found' }, { status: 404 })
+  if (!data) return NextResponse.json({ error: 'Widget not found' }, { status: 404 })
   return NextResponse.json({ data })
 }
 
