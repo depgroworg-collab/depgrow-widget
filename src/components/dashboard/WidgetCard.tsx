@@ -6,7 +6,7 @@ import type { Widget } from '@/types'
 
 interface Props {
   widget: Widget
-  analytics: { total_clicks: number; today_clicks: number; this_week_clicks: number } | null
+  analytics: any
 }
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://widget.depgrow.in'
