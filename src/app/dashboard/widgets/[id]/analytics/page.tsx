@@ -1,4 +1,4 @@
-import { createServerActionClient } from '@/lib/supabase'
+import { createServerActionClient } from '@/lib/supabase.server'
 import { notFound } from 'next/navigation'
 import AnalyticsCharts from '@/components/dashboard/AnalyticsCharts'
 

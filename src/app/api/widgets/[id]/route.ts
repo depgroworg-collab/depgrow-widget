@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerActionClient } from '@/lib/supabase'
+import { createServerActionClient } from '@/lib/supabase.server'
 
 // PATCH /api/widgets/[id]
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {

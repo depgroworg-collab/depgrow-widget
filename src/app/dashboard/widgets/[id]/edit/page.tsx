@@ -1,4 +1,4 @@
-import { createServerActionClient } from '@/lib/supabase'
+import { createServerActionClient } from '@/lib/supabase.server'
 import { notFound } from 'next/navigation'
 import WidgetForm from '@/components/dashboard/WidgetForm'
 
