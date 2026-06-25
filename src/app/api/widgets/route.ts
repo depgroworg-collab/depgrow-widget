@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerActionClient } from '@/lib/supabase'
+import { createServerActionClient } from '@/lib/supabase.server'
 import { validateWidgetForm, PLAN_LIMITS } from '@/lib/utils'
 
 // GET /api/widgets — list user's widgets
