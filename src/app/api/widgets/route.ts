@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
   if (validErr) return NextResponse.json({ error: validErr }, { status: 400 })
 
   // Check plan limits
-  const { data: profile } = await sb.from('profiles').select('plan').eq('id', user.id).single()
-  const plan = ((profile ? profile.plan : null) ?? 'free') as keyof typeof PLAN_LIMITS
+  const profileRes = await sb.from('profiles').select('plan').eq('id', user.id).single()
+  const plan = ((profileRes.data as any)?.plan ?? 'free') as keyof typeof PLAN_LIMITS
   const limit = PLAN_LIMITS[plan]
   const { data: countData } = await sb.rpc('user_widget_count', { p_user_id: user.id })
   if ((countData || 0) >= limit) {
