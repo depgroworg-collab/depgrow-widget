@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   const profileRes = await sb.from('profiles').select('plan').eq('id', user.id).single()
   const plan = ((profileRes.data as any)?.plan ?? 'free') as keyof typeof PLAN_LIMITS
   const limit = PLAN_LIMITS[plan]
-  const { data: countData } = await sb.rpc('user_widget_count', { p_user_id: user.id })
+  const { data: countData } = await (sb as any).rpc('user_widget_count', { p_user_id: user.id })
   if ((countData || 0) >= limit) {
     return NextResponse.json(
       { error: `Your ${plan} plan allows ${limit} widget${limit === 1 ? '' : 's'}. Upgrade to create more.` },
