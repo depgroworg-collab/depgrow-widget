@@ -14,7 +14,7 @@ export default function SettingsPage() {
       if (data.user) setEmail(data.user.email || '')
     })
     sb.from('profiles').select('name').single().then(({ data }) => {
-      if (data) setName(data.name || '')
+      if (data) setName((data as any).name || '')
     })
   }, [])
 
