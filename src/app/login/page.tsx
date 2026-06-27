@@ -1,77 +1,77 @@
-'use client'
-import { useState } from 'react'
+﻿'use client'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
-const DepgrowLogo = () => (
-  <svg width="32" height="32" viewBox="0 0 22 22" fill="none">
+const Logo = () => (
+  <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
     <path d="M4 16 C4 16 7 6 11 6 C15 6 18 16 18 16" stroke="#0E7A5A" strokeWidth="1.8" strokeLinecap="round"/>
     <path d="M8 11 C8 11 9.5 14 11 14 C12.5 14 14 11 14 11" stroke="#16A97D" strokeWidth="1.8" strokeLinecap="round"/>
     <circle cx="11" cy="6" r="2" fill="#0E7A5A"/>
   </svg>
 )
 
-export default function LoginPage() {
+function LoginInner() {
   const router = useRouter()
-  const [email, setEmail]       = useState('')
+  const searchParams = useSearchParams()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading]   = useState(false)
-  const [error, setError]       = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true); setError(null)
-    const { error: err } = await createClient().auth.signInWithPassword({ email, password })
+    const sb = createClient()
+    const { error: err } = await sb.auth.signInWithPassword({ email, password })
     if (err) { setError(err.message); setLoading(false); return }
-    router.push('/dashboard')
+    const redirect = searchParams.get('redirect') ?? '/dashboard'
+    router.push(redirect)
+    router.refresh()
   }
 
   return (
     <div className="auth-wrap">
-      <div className="auth-card card">
-        {/* Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.75rem' }}>
-          <DepgrowLogo />
-          <div>
-            <div style={{ fontSize: 19, fontWeight: 800, lineHeight: 1.1 }}>
-              <span style={{ color: 'var(--green)' }}>Dep</span>
-              <span style={{ color: 'var(--green-light)' }}>grow</span>
-              <span style={{ color: 'var(--text-dim)', fontSize: 13, fontWeight: 500, marginLeft: 6 }}>Widget</span>
-            </div>
-            <div style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 1 }}>WhatsApp Widget SaaS</div>
+      <div className="auth-card">
+        <div className="auth-logo">
+          <Logo />
+          <div className="auth-logo-text">
+            <span style={{color:'#0E7A5A'}}>Dep</span><span style={{color:'#16A97D'}}>grow</span>
+            <span className="auth-logo-sub">Widget</span>
           </div>
         </div>
-
         <h1>Welcome back</h1>
         <p>Sign in to your dashboard</p>
-
         <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="field">
-            <label className="label">Email</label>
-            <input className="input" type="email" placeholder="you@company.com" value={email} onChange={e => setEmail(e.target.value)} required />
+          {error && <div className="auth-error">⚠ {error}</div>}
+          <div className="auth-field">
+            <label className="auth-label">Email</label>
+            <input className="auth-input" type="email" placeholder="you@company.com" value={email} onChange={e=>setEmail(e.target.value)} required />
           </div>
-          <div className="field">
-            <label className="label">Password</label>
-            <input className="input" type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
+          <div className="auth-field">
+            <label className="auth-label">Password</label>
+            <input className="auth-input" type="password" placeholder="••••••••" value={password} onChange={e=>setPassword(e.target.value)} required />
           </div>
-          {error && <p className="error-msg">⚠ {error}</p>}
-          <button className="btn btn-primary" type="submit" disabled={loading} style={{ width: '100%', justifyContent: 'center', padding: '12px' }}>
-            {loading ? <><span className="spinner" /> Signing in…</> : 'Sign in →'}
+          <button className="auth-submit" type="submit" disabled={loading}>
+            {loading ? '⏳ Signing in…' : 'Sign in →'}
           </button>
         </form>
-
         <div className="auth-footer">
           No account? <Link href="/register">Create one free</Link>
         </div>
-
-        {/* Brand footer */}
-        <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-          <Link href="https://depgrow.in" style={{ fontSize: 12, color: 'var(--text-dim)', textDecoration: 'none' }}>
-            ← Back to depgrow.in
-          </Link>
+        <div className="auth-back">
+          <Link href="/">← Back to home</Link>
         </div>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="auth-wrap"><div style={{color:'#16A97D'}}>Loading…</div></div>}>
+      <LoginInner />
+    </Suspense>
   )
 }
