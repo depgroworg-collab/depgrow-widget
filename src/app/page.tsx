@@ -191,12 +191,12 @@ const clients = [
 ]
 
 const features = [
-  {icon:'⚡',title:'60-second setup',desc:'Paste one script tag into your website. The button appears instantly — no React, no build step, no dependencies.'},
-  {icon:'🎨',title:'Fully customisable',desc:'Choose position, colors, button size, tooltip text, and pre-filled message. Preview changes live before publishing.'},
-  {icon:'📊',title:'Click analytics',desc:'Track every click with country, device, and daily breakdowns. Know exactly where your WhatsApp leads come from.'},
-  {icon:'🔒',title:'Domain whitelisting',desc:'Lock each widget to specific domains. Your embed code only works where you intend it to.'},
-  {icon:'🌍',title:'Works everywhere',desc:'Zero-conflict isolated styles. Works on WordPress, Webflow, Wix, Shopify, plain HTML — any website.'},
-  {icon:'♾️',title:'Multiple widgets',desc:'Create separate widgets for each client or brand. Different numbers, messages, and designs — all in one dashboard.'},
+  {icon:'ti-bolt',title:'60-second setup',desc:'Paste one script tag into your website. The button appears instantly — no React, no build step, no dependencies.'},
+  {icon:'ti-bolt',title:'60-second setup',desc:'Choose position, colors, button size, tooltip text, and pre-filled message. Preview changes live before publishing.'},
+  {icon:'ti-bolt',title:'60-second setup',desc:'Track every click with country, device, and daily breakdowns. Know exactly where your WhatsApp leads come from.'},
+  {icon:'ti-bolt',title:'60-second setup',desc:'Lock each widget to specific domains. Your embed code only works where you intend it to.'},
+  {icon:'ti-bolt',title:'60-second setup',desc:'Zero-conflict isolated styles. Works on WordPress, Webflow, Wix, Shopify, plain HTML — any website.'},
+  {icon:'ti-bolt',title:'60-second setup',desc:'Create separate widgets for each client or brand. Different numbers, messages, and designs — all in one dashboard.'},
 ]
 
 const process = [
