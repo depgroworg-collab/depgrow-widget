@@ -84,7 +84,7 @@ function Hero() {
     if(stage&&inner) {
       const onMove=(e:MouseEvent)=>{mx=e.clientX;my=e.clientY}
       window.addEventListener('mousemove',onMove)
-      function raf2(){
+      const raf2 = () => {
         cx2+=(mx-cx2)*.08; cy2+=(my-cy2)*.08
         const rect=stage!.getBoundingClientRect()
         const rx=(cx2-(rect.left+rect.width/2))/rect.width
