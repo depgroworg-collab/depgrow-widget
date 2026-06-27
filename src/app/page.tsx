@@ -192,11 +192,11 @@ const clients = [
 
 const features = [
   {icon:'ti-bolt',title:'60-second setup',desc:'Paste one script tag into your website. The button appears instantly — no React, no build step, no dependencies.'},
-  {icon:'ti-palette',title:'60-second setup',desc:'Choose position, colors, button size, tooltip text, and pre-filled message. Preview changes live before publishing.'},
-  {icon:'ti-chart-bar',title:'60-second setup',desc:'Track every click with country, device, and daily breakdowns. Know exactly where your WhatsApp leads come from.'},
-  {icon:'ti-lock',title:'60-second setup',desc:'Lock each widget to specific domains. Your embed code only works where you intend it to.'},
-  {icon:'ti-world',title:'60-second setup',desc:'Zero-conflict isolated styles. Works on WordPress, Webflow, Wix, Shopify, plain HTML — any website.'},
-  {icon:'ti-infinity',title:'60-second setup',desc:'Create separate widgets for each client or brand. Different numbers, messages, and designs — all in one dashboard.'},
+  {icon:'ti-palette',title:'Live preview builder',desc:'Choose position, colors, button size, tooltip text, and pre-filled message. Preview changes live before publishing.'},
+  {icon:'ti-chart-bar',title:'Full click analytics',desc:'Track every click with country, device, and daily breakdowns. Know exactly where your WhatsApp leads come from.'},
+  {icon:'ti-lock',title:'Domain whitelisting',desc:'Lock each widget to specific domains. Your embed code only works where you intend it to.'},
+  {icon:'ti-world',title:'Works everywhere',desc:'Zero-conflict isolated styles. Works on WordPress, Webflow, Wix, Shopify, plain HTML — any website.'},
+  {icon:'ti-infinity',title:'Unlimited widgets',desc:'Create separate widgets for each client or brand. Different numbers, messages, and designs — all in one dashboard.'},
 ]
 
 const process = [
@@ -247,7 +247,7 @@ export default function LandingPage() {
         <div className="leak-grid">
           {features.map((f,i)=>(
             <div key={i} className="leak-card">
-              <div style={{fontSize:28,marginBottom:'0.75rem'}}>{f.icon}</div>
+              <i className={`ti ${f.icon}`} style={{fontSize:28,marginBottom:'0.75rem',display:'block',color:'#16A97D'}}/>
               <div className="leak-title">{f.title}</div>
               <p className="leak-desc">{f.desc}</p>
             </div>
